@@ -26,7 +26,7 @@
     - Sau khi cài đặt xong bạn có thể vào trò chơi để trải nghiệm.
 4. Chú ý
     - Đây là client, bạn cần phải có thêm file server.
-    - Bạn có thể tải file server tại đây:
+    - Bạn có thể tải file server tại đây: https://github.com/int04/dragon-ball-h5-MMO-Server
 
 5. Giấy phép sử dụng
     - Mã nguồn không có giấy phép chính thức, bất kì ai cũng có thể sử dụng, học tập,...
