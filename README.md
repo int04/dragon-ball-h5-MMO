@@ -3,6 +3,8 @@
 1. Introduce
 
      [Game images in the section **7**]
+         ![image](https://github.com/int04/dragon-ball-h5-MMO/assets/20983238/0a169963-914f-45e6-bc91-6df39e33d8a9)
+
 
       We're already so familiar with the Dragon Ball series, so I won't explain further. Since I was a kid, I've been a big fan of this show.
 
@@ -14,31 +16,31 @@
 
     Note: You're reading the readme for the client-side of the game. (Scroll down to section 4 to get the link to the server file.)
 
-2. Created 
+3. Created 
     - The game has been written on JavaScript source code.
     - The library used is Pixijs v7.0
 
-3. Install
+4. Install
 
     -  Youcan run the client via **Visual Code** **live Server** (I used it while writing this game)
     -  Open the **config.json** file and edit the **server** line to your IP if you want to configure it online (I have 127.0.0.1 preconfigured to run on localhost).
     - After the installation is complete you can enter the game to experience.
-4. Note
+5. Note
     - This is the client, you need to add the file server.
     - download the file server: https://github.com/int04/dragon-ball-h5-MMO-Server
 
-5. licenses
+6. licenses
     - The source code has no official license, anyone can use, learn,...
     - I am not involved in, or responsible for, any consequences (if any) from the intended use.
     - About Pixijs:
         + Home page: https://pixijs.com
 
-6. Contributing, author
+7. Contributing, author
     - Independently written by **int04**.
          + github: https://github.com/int04
      - Images: images are collected online, I do not own or hold the copyright of these images.
 
-7. Images Demo
+8. Images Demo
 ![image](https://github.com/int04/dragon-ball-h5-MMO/assets/20983238/ca3ecc95-8149-4abe-84e6-c099ecee0cb8)
    ![image](https://github.com/int04/dragon-ball-h5-MMO/assets/20983238/9cc745fc-17f6-409f-a635-afde6e05181e)
    ![image](https://github.com/int04/dragon-ball-h5-MMO/assets/20983238/3617defb-dbee-403b-a6f5-81fc24f6aef0)
