@@ -1,0 +1,307 @@
+<!-------html------->
+
+<html lang="vi">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="theme-color" content="#F2462E">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="keywords"
+        content="Pokemon X,Pokemon Y,Pokemon Black, Pokemon White,Pokemon RPG,MMORPG, Pokemon MMORPG, Pokemon Online, Pokemon MMO, Pokemon Game, Online Pokemon Game, Pokemon, RPG , pokemon h5">
+    <meta name="description" content="Web Game PokeMon MMO Play NOW.">
+    <meta property="og:title" content="PokeMon Web Game">
+    <meta property="og:description" content="PokeMon Burn - Trò chơi di chuyển tự do phưu lưu cùng bạn bè tổ đội v.v">
+    <html itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="name" content="PokeMon H5 Online">
+    <meta itemprop="description" content="PokeMOn H5- Trò chơi khám phá di chuyển phưu lưu cùng bạn bè online v.v">
+
+
+
+
+
+
+
+    <style>
+        @font-face {
+            font-family: 'chelthm';
+            src: url('/assets/font/unicode.chelthm.ttf');
+        }
+
+
+        @font-face {
+            font-family: 'PatrickHandSCRegular';
+            src: url('/assets/font/PatrickHandSC-Regular.ttf');
+        }
+
+        @font-face {
+            font-family: 'PottaOne-Regular';
+            src: url('/assets/font/PottaOne-Regular.ttf');
+        }
+
+        @font-face {
+            font-family: 'fontchinh';
+            src: url('/assets/font/Coiny-Regular.ttf');
+        }
+    </style>
+</head>
+
+
+
+<style>
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.msgpack.min.js"></script>
+<script defer src="/src/assets/CDN/socketv4.js"></script>
+<script defer src="/src/assets/CDN/tween.umd.js"></script>
+<script defer src="/src/assets/CDN/pixi.js"></script>
+<script defer src="/src/assets/CDN/gsap.min.js"></script>
+<script defer src="/src/assets/CDN/viewport.min.js"></script>
+<script defer type="text/javascript" src="/src/assets/CDN/input.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+<script src="/src/assets/CDN/ghi.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+<body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-10" id="">
+              <div class="row">
+                <div class="col-lg-7">
+                    <div id="game">
+                    </div>
+    
+                </div>
+                <div class="col-lg-5">
+                    <div id="app2">
+                    </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-2" id="sidebar">
+
+
+
+
+                <hr>
+                <div class="container">
+                    <input id="speed" type="number" class="form-control" placeholder="Tốc độ" value="1">   
+
+                <input id="nameSheet" type="text" class="form-control" placeholder="Tên Sheet" value="big0">   
+
+
+
+                <input id="width" type="number" class="form-control" placeholder="Rộng" value="50">   
+
+                <input id="height" type="number" class="form-control" placeholder="Dài" value="50">   
+
+
+
+                <input id="name" type="text" class="form-control" placeholder="img" value="259">   
+
+                <input id="mo" type="number" class="form-control" placeholder="Mờ" value="0.5">   
+
+                <textarea id="code" class="form-control" rows="5" placeholder="Code"></textarea>
+
+                <button class="btn btn-primary" onclick="getwidth()">Lấy width</button>
+
+                </div>
+            </div>
+
+            </div> 
+    </div>
+            <style>
+                #game-container {
+                    height: 100vh;
+                    /* Chiếm 70% chiều cao của màn hình */
+                    background-color: #f8f9fa;
+                    /* Màu nền của khung game */
+                }
+
+                #sidebar {
+                    height: 100vh;
+                    /* Chiếm 30% chiều cao của màn hình */
+                    background-color: #e9ecef;
+                    /* Màu nền của khung tùy chọn */
+                }
+            </style>
+</body>
+
+<script defer>
+    let setting  = {
+        getwidth : 0,
+    };
+    getwidth = () => {
+        setting.getwidth = 1;
+    }
+    // document ready not use Jquery
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let game = document.getElementById("game");
+        let width = 700;
+        let height = 500;
+        var app = new PIXI.Application({
+        width: width,
+        height: height,
+        backgroundColor: 0x1099bb,
+        resolution: window.devicePixelRatio || 1,
+    });
+    document.getElementById("game").appendChild(app.view);
+
+
+    let manhinh = new PIXI.Graphics();
+    manhinh.beginFill(0x000000, 1);
+    manhinh.lineStyle(1, 0x000000, 1);
+    manhinh.drawRect(0, 0, 700, 500);
+    manhinh.endFill();
+
+    app.stage.addChild(manhinh);
+
+    let manhinh2 = new PIXI.Graphics();
+    manhinh2.beginFill(0x444, 1);
+    manhinh2.lineStyle(1, 0x000000, 1);
+    manhinh2.drawRect(700, 0, 200, 200);
+    manhinh2.endFill();
+    app.stage.addChild(manhinh2);
+
+    let container = new PIXI.Container();
+    manhinh.addChild(container);
+
+
+    let img = new PIXI.Sprite("");
+
+
+    container.addChild(img);
+
+
+    let sprite = new PIXI.Graphics();
+    sprite.beginFill(0xFF0000, 0.5);
+    sprite.lineStyle(1, 0xFF0000, 1);
+    sprite.drawRect(0, 0, 100, 100);
+    sprite.endFill();
+    container.addChild(sprite);
+    
+
+    // appticker
+    app.ticker.add(() => {
+        let idsheet = document.getElementById("nameSheet").value;
+        img.texture = PIXI.Texture.from('/assets/char/'+idsheet+'.png');
+        // change width sprite 
+        sprite.width = document.getElementById("width").value * 1;
+        sprite.height = document.getElementById("height").value * 1;
+
+        // sprite alway center of container
+        let nhanVatX_set = sprite.x * (container.scale.x);
+        let nhanVatY_set = sprite.y * (container.scale.y);
+
+        container.x = (app.screen.width / 2) - nhanVatX_set;
+        container.y = (app.screen.height / 2) - nhanVatY_set;
+
+
+    });
+
+    addEventListener('keydown', (event) => {
+        let speed = document.getElementById("speed").value * 1;
+        if (event.keyCode === 37) {
+            event.preventDefault();
+            sprite.x -= speed;
+        }
+        if (event.keyCode === 38) {
+            event.preventDefault();
+            sprite.y -= speed;
+        }
+        if (event.keyCode === 39) {
+            event.preventDefault();
+            sprite.x += speed;
+        }
+        if (event.keyCode === 40) {
+            event.preventDefault();
+            sprite.y += speed;
+        }
+    });
+
+
+    var app2 = new PIXI.Application({
+        width: 300,
+        height: 200,
+        backgroundColor: 0x1099bb,
+        resolution: window.devicePixelRatio || 1,
+    });
+    document.getElementById("app2").appendChild(app2.view);
+
+    let container2 = new PIXI.Container();
+
+    let img2 = new PIXI.Sprite("");
+    let img3 = new PIXI.Sprite("");
+    container2.addChild(img3,img2);
+    app2.stage.addChild(container2);
+
+    app2.ticker.add(() => {
+        let idsheetz = document.getElementById("name").value;
+        img2.texture = PIXI.Texture.from('/assets/char/'+idsheetz+'.png');
+
+        if(setting.getwidth ==1){
+            setting.getwidth = 0;
+            document.getElementById("width").value = img2.width;
+            document.getElementById("height").value = img2.height;
+        }
+
+        try{
+            let newsrc = new PIXI.Texture(img.texture, new PIXI.Rectangle(sprite.x, sprite.y, sprite.width, sprite.height));
+            img3.texture = newsrc;
+        }
+        catch(e)
+        {
+
+        }
+
+        img2.alpha = document.getElementById("mo").value * 1;
+
+
+        document.getElementById("code").value = JSON.stringify({
+            name : idsheetz, sheet :  document.getElementById("nameSheet").value , x : sprite.x, y :sprite.y, w : sprite.width, h : sprite.height,
+        })+",";
+        
+
+        container2.x = (app2.screen.width / 2) - (container2.width / 2);
+        container2.y = (app2.screen.height / 2) - (container2.height / 2);
+
+    });
+
+
+
+    });
+
+   
+
+
+</script>
+
+
+
+
+
+
+
+</html>

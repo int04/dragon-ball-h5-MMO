@@ -1,0 +1,953 @@
+
+<!-------html------->
+
+<html lang="vi">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="theme-color" content="#F2462E">
+<meta name="viewport"
+content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="full-screen" content="yes">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
+<meta name="keywords" content="Pokemon X,Pokemon Y,Pokemon Black, Pokemon White,Pokemon RPG,MMORPG, Pokemon MMORPG, Pokemon Online, Pokemon MMO, Pokemon Game, Online Pokemon Game, Pokemon, RPG , pokemon h5">
+<meta name="description" content="Web Game PokeMon MMO Play NOW.">
+<meta property="og:title" content="PokeMon Web Game">
+<meta property="og:description" content="PokeMon Burn - Trò chơi di chuyển tự do phưu lưu cùng bạn bè tổ đội v.v">
+<html itemscope itemtype="http://schema.org/Product">
+<meta itemprop="name" content="PokeMon H5 Online">
+<meta itemprop="description" content="PokeMOn H5- Trò chơi khám phá di chuyển phưu lưu cùng bạn bè online v.v">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.12/pixi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@pixi/tilemap@latest/dist/pixi-tilemap.umd.js"></script>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@pixi/filter-kawase-blur@3.1.1/dist/filter-kawase-blur.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@pixi/filter-drop-shadow@3.1.1/dist/filter-drop-shadow.min.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+<style>
+  
+</style>
+</head>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12" id="header">
+            <div id="game"></div>
+
+            </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-8" id="">
+
+           <div id="tool">
+            <center>Công cụ <button class="btn btn-success" onclick="getAnh()">GET</button> <button class="btn btn-success" onclick="resetanh()">Reset</button> <button class="btn btn-danger" onclick="resetALL()">Reset ALL</button></center>
+
+            <center>
+                <button class="btn btn-success" onclick="clickSetting('ao_mau')">Áo mẫu</button>
+                <button class="btn btn-success" onclick="clickSetting('quan_mau')">Quần mẫu</button>
+                <button class="btn btn-success" onclick="clickSetting('dau_mau')">Đầu mẫu</button>
+                <button class="btn btn-success" onclick="clickSetting('ao')">Áo</button>
+                <button class="btn btn-success" onclick="clickSetting('quan')">Quần</button>
+                <button class="btn btn-success" onclick="clickSetting('dau')">Đầu</button>
+               
+            </center>
+            <hr>
+                <input class="form-control" id="noidung" value="">
+            <hr>
+            <div id="anh" class="gallery">
+
+            </div>
+           </div>
+      </div>
+
+      <script> 
+
+function getAnh() {
+    $("#anh").html('')
+    $.ajax({
+        url : '//game.test/dev/get.php',
+        success : function(d) 
+        {
+            let t = JSON.parse(d)
+            t.forEach(element => {
+                $("#anh").append(`<img onclick="selectedImg('${element}')" src="/assets/phu/${element}.png">`)
+            });
+        }
+    })
+}
+
+function copyToClipboard(text) {
+  const input = document.createElement('textarea');
+  input.style.position = 'fixed';
+  input.style.opacity = 0;
+  input.value = text;
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand('Copy');
+  document.body.removeChild(input);
+}
+
+function selectedImg(name) {
+    copyToClipboard(name)
+    let noidung = $("#noidung").val();
+    if(noidung.includes(name)) return;
+    // check exist , 
+    if(noidung.split(',') <=0) 
+    {
+        noidung = `${name}`;
+    }
+    else
+    {
+        noidung += `,${name}`;
+    }
+    // delete last ,
+    $("#noidung").val(noidung)
+}
+
+function resetanh() {
+    $("#noidung").val('')
+}
+
+        </script>
+      <div class="col-lg-4" id="sidebar">
+      
+           
+    
+
+     <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#ao">Áo</a></li>
+            <li><a data-toggle="tab" href="#quan">Quần</a></li>
+            <li><a data-toggle="tab" href="#dau">Đầu</a></li>
+
+
+        </ul>
+
+        <div class="tab-content">
+            <div id="ao" class="tab-pane  in active  gallery">
+               
+            </div>
+            <div id="quan" class="tab-pane  gallery">
+              
+            </div>
+            <div id="dau" class="tab-pane gallery ">
+                
+            </div>
+           
+        </div>
+
+        <textarea id="text" rows="3" class="form-control"></textarea>
+
+
+        <hr>
+        <textarea id="import" rows="3" class="form-control"></textarea>
+        <button class="btn btn-success" onclick="impordata()">Nhập</button>
+
+    </div>
+
+    <style>
+        .gallery {
+            max-height: 600px; /* Äá»™ cao tá»‘i Ä‘a cá»§a tháº» div chá»©a danh sĂ¡ch áº£nh */
+            resize: both;
+            overflow: auto;
+            padding: 6px;
+        }
+        .gallery img {
+transition: box-shadow 0.3s ease-in-out; /* ThĂªm hiá»‡u á»©ng transition cho box-shadow */
+}
+
+.gallery img:hover {
+box-shadow: 0 0 0 2px #000, 0 0 0 2px #000 inset, 0 0 0 2px #000, 0 0 0 2px #000 inset; /* Hiá»ƒn thá»‹ cáº£ 4 Ä‘Æ°á»ng viá»n Ä‘en 2px bao quanh áº£nh */
+}
+    </style>
+    <hr>
+        
+      </div>
+    </div>
+  </div>
+
+  <style>
+     #game-container {
+height: 100vh; /* Chiáº¿m 70% chiá»u cao cá»§a mĂ n hĂ¬nh */
+background-color: #f8f9fa; /* MĂ u ná»n cá»§a khung game */
+}
+
+#sidebar {
+height: 100vh; /* Chiáº¿m 30% chiá»u cao cá»§a mĂ n hĂ¬nh */
+background-color: #e9ecef; /* MĂ u ná»n cá»§a khung tĂ¹y chá»n */
+}
+  </style>
+</body>
+
+<script>
+    let cache = []
+    </script>
+<script defer  src="./source/base/img.js"></script>
+<script defer  src="./source/base/caitrang.js"></script>
+<script defer  src="./source/base/ao.js"></script>
+<script defer  src="./source/base/quan.js"></script>
+<script defer  src="./source/base/dau.js"></script>
+<script defer  src="./source/base/spQuai.js"></script>
+<script defer  src="./source/base/co.js"></script>
+<script defer  src="./source/base/item.js"></script>
+<script defer  src="./source/base/kinang.js"></script>
+<script defer  src="./source/base/skill.js"></script>
+<script defer  src="./source/base/data_map.js"></script>
+
+
+<script defer  src="./source/base/assets.js"></script>
+
+
+
+
+<script defer  src="baseeditskin.js"></script>
+
+
+
+<script>
+
+    function NhapData() {
+        images.forEach((image) => {
+  image.farm.forEach((farm) => {
+   
+    let array = ["dungyen","move","attack","choang"];
+
+    let ArrayofItem = array
+    for(let name in ArrayofItem) {
+        if(farm[ArrayofItem[name]])
+        {
+            farm[ArrayofItem[name]].farme.forEach((farme) => {
+                // check if the resource exists in PIXI Loader
+                if (!checkCache(image.name + "_" + farme)) {
+                    loader.add(image.name + "_" + farme, "/assets/char/" + farme + ".png");
+                    cache.push(image.name + "_" + farme);
+                }
+            });
+        }
+    }
+   
+
+   
+   
+
+    
+   
+    
+  });
+});
+
+
+    }
+
+let myPlayer = {skin: {
+    ao: "WxnIKrlfFP",
+     quan: "tWNvFxfloN",
+      dau: "GaMtSOeboy",
+    }};
+
+    let setting_edit = {
+        ao : true,
+        quan : true,
+        dau : true,
+        ao_mau : false,
+        quan_mau : false,
+        dau_mau : false,
+    };
+
+
+    function clickSetting(value) 
+    {
+        setting_edit[value] = !setting_edit[value];
+        console.log(setting_edit)
+    }
+
+
+    let resetALL = function() {
+        for(let loai in myPlayer.skin) 
+        {
+            let img = images.find(e => e.name == myPlayer.skin[loai]);
+            if(img)
+            {
+                let farm = img.farm[0];
+                if(farm)
+                {
+                    for(let fill in farm) 
+                    {
+                        farm[fill].farme = ['none'];
+                    }
+                }
+                
+            }
+        }
+    }
+    let playGame = function () {
+
+        loader.add("none", "/assets/char/-1.png");
+
+        let array = ["dungyen","move","attack","choang"];
+
+
+
+        function RandAZ(num) 
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            for (var i = 0; i < num; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            return text;
+        }
+     
+      
+
+    $("#import").on("input", function() {
+        console.log('đã nhập')
+        let text = $("#import").val();
+        let data = JSON.parse(text);
+        data.forEach(element => {
+            myPlayer.skin[element.type] = element.name;
+            console.log(myPlayer.skin)
+        });
+
+       NhapData();
+
+    }
+    );
+   
+    function ClickName(p) 
+    {
+        $("#ao").html('222');
+        $("#quan").html('222');
+        $("#dau").html('222');
+
+        for(let fill in myPlayer.skin) {
+        let a = getImg(myPlayer.skin[fill]);
+        let school = a.farm[0];
+
+     
+    
+
+        let html = '';
+
+        if(fill == 'dau')
+        console.log(school)
+
+        for(let k in school) {
+            let num = '';
+
+
+           if(k == p) 
+           {
+            school[k].farme.forEach(e => {
+                num+=e+',';
+            });
+
+            // remove last ,
+            num = num.slice(0, -1);
+
+    html+= '<div style="border-style: dotted;">';
+    html+='<center>'+k+'</center>';
+    html+= `   <div class="form-group" style="display: block;">
+        <label for="farme_0">Farme 0:</label>
+        <input type="text" class="form-control" id="`+k+`_farme" value="${num}">
+    </div>`;
+    html+=`
+     
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_width">Chiều cao:</label>
+        <input type="number" class="form-control" id="`+k+`_width" value="`+school[k].width+`">
+      </div>
+    `;
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_height">Chiều Rộng:</label>
+        <input type="number" class="form-control" id="`+k+`_height" value="`+school[k].height+`">
+      </div>
+    `;
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_x">x:</label>
+        <input type="number" class="form-control" id="`+k+`_x" value="`+school[k].x+`">
+      </div>
+    `;
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_y">Y:</label>
+        <input type="number" class="form-control" id="`+k+`_y" value="`+school[k].y+`">
+      </div>
+    `;
+
+
+    if(k == 'move')
+    {
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_x">x move:</label>
+        <input type="number" class="form-control" id="`+k+`_xx" value="`+(school[k].xx < 0 || school[k].xx > 0 ? school[k].xx : 0)+`">
+      </div>
+    `;
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_y">Y move:</label>
+        <input type="number" class="form-control" id="`+k+`_yy" value="`+(school[k].yy < 0 || school[k].yy > 0 ? school[k].yy : 0)+`">
+      </div>
+    `;
+    }
+
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_m">Mô tả spc:</label>
+        <input type="text" class="form-control" id="`+k+`_mota" value="`+a.mota+`">
+      </div>
+    `;
+
+    html+=`
+      <div class="form-group" style="display: block;">
+        <label for="`+k+`_m">Data riêng:</label>
+        <input type="text" class="form-control" id="`+fill+`_val" value="">
+      </div>
+    `;
+    html+= '</div><br>';
+  }
+           }
+
+        $("#"+fill).html(html);
+
+        $("#"+fill+" input").on("input", function() {
+    let inputId = $(this).attr("id");
+    let inputArr = inputId.split("_");
+    let fieldName = inputArr[0];
+    let property = inputArr[1];
+    let newValue = $(this).val();
+
+    if(property == 'mota') 
+    {
+        a.gioithieu = newValue;
+    }
+    else
+    // Cập nhật giá trị trong mảng
+    if(property == 'farme') {
+        let farme = newValue.split(',');
+        let aa = [];
+        farme.forEach(element => {
+            let f = element;
+            aa.push(f)
+        });
+        school[fieldName][property] = farme;
+    } else {
+        school[fieldName][property] = +newValue;
+    }
+
+    if(property == 'width' || property == 'height')
+    {
+       
+        let a = getImg(myPlayer.skin.ao);
+        let school = a.farm[0];
+        for(let name in school) 
+        {
+            school[name].width = newValue;
+            school[name].height = newValue;
+            console.log(name)
+        }
+
+
+    
+}
+
+
+   xuatdata();
+
+   NhapData();
+
+});
+
+
+
+
+    }
+
+    }
+    function xuatdata() {
+        let id = RandAZ(5);
+        let re = '';
+        for(let fill in myPlayer.skin) {
+        let a = getImg(myPlayer.skin[fill]);
+        let school = a.farm[0];
+        console.log(school)
+        for(let name in school) 
+        {
+           
+        }
+      
+    // delete a.mota
+    delete a.mota;
+    delete a.goiten;
+    let newObj = Object.assign({}, a);
+
+    newObj.name = RandAZ(10);
+    newObj.he = 4;
+    newObj.type = fill;
+    newObj.id = id;
+
+   
+
+    //re += JSON.stringify(newObj,null, 2) + ','
+    re+=JSON.stringify(newObj)+',';
+
+    if(fill == 'ao') $("#ao_val").val(JSON.stringify(newObj));
+    if(fill == 'quan') $("#quan_val").val(JSON.stringify(newObj));
+    if(fill == 'dau') $("#dau_val").val(JSON.stringify(newObj));
+
+
+
+
+    }
+    $("#text").val(re);
+    }
+
+
+
+
+    
+    let Allsprite = new PIXI.Container();
+
+
+
+
+        const app = new PIXI.Application({ width: window.innerWidth, height: 350, backgroundColor: 0x1099bb });
+        const gameDiv = document.getElementById("game");
+        //reset gameDiv
+        $("#game").html('')
+        gameDiv.appendChild(app.view);
+
+        let r= 0;
+        let t = 1;
+        let r2 = 0;
+        array.forEach(e => {
+            let head = new PIXI.Sprite(loader.resources.head.texture);
+
+
+head.scale.set(0.47, 0.49);
+head.x += 5;
+head.y += 13;
+
+let foot = new PIXI.Sprite(loader.resources.foot.texture);
+foot.scale.set(0.40, 0.32);
+foot.x += 4;
+foot.y += 39 + 6;
+
+let body = new PIXI.Sprite(loader.resources.body.texture);
+
+body.scale.set(0.4, 0.38);
+body.x += 3;
+body.y += 39;      
+
+head.visible = true;
+
+let load_playerQuan = getImg(myPlayer.skin.quan);
+let load_playerAo = getImg(myPlayer.skin.ao);
+let load_playerDau = getImg(myPlayer.skin.dau);
+
+let playerQuan = new PIXI.Sprite(
+            loader.resources[
+                getFarm(myPlayer.skin.quan, load_playerQuan.farm[0].move.farme[0])
+                ].texture
+        );
+
+        playerQuan.scale.set(load_playerQuan.farm[0].move.width, load_playerQuan.farm[0].move.height);
+        playerQuan.sprite = 0;
+
+        let playerAo = new PIXI.Sprite(
+            loader.resources[getFarm(myPlayer.skin.ao, load_playerAo.farm[0].move.farme[0])].texture
+        );
+        playerAo.sprite = 0;
+
+        playerAo.scale.set(load_playerAo.farm[0].move.width, load_playerAo.farm[0].move.height);
+
+        let playerDau = new PIXI.Sprite(
+            loader.resources[
+                getFarm(myPlayer.skin.dau, load_playerDau.farm[0].move.farme[0])
+                ].texture
+        );
+
+        playerDau.scale.set(load_playerDau.farm[0].move.width, load_playerDau.farm[0].move.height);
+        playerDau.sprite = 0;
+
+        playerDau.x = head.x + load_playerDau.farm[0].move.x;
+        playerDau.y = head.y + load_playerDau.farm[0].move.y;
+
+        playerQuan.x = foot.x + load_playerQuan.farm[0].move.x;
+        playerQuan.y = foot.y + load_playerQuan.farm[0].move.y;
+
+        playerAo.x = body.x + load_playerAo.farm[0].move.x;
+        playerAo.y = body.y + load_playerAo.farm[0].move.y;
+        playerAo.load = 0;
+        playerAo.name = "playerAo";
+        playerQuan.name = "playerQuan";
+        playerDau.name = "playerDau"
+        head.name = "head";
+        foot.name = "foot";
+        body.name = "body";
+
+let dungYen = new PIXI.Container();
+
+dungYen.addChild(head, foot, body , playerQuan, playerDau,playerAo);
+
+dungYen.buttonclick = 0;
+dungYen.interactive = true;
+dungYen.buttonMode = true;
+// click
+
+dungYen.on('pointerdown', function() {
+    ClickName(e);
+});
+
+
+
+
+if(e != "flymove") 
+{
+    t = r%8 == 0 ? t+1 : t;
+    r2 = r%8 == 0 ? 0 : r2;
+
+    dungYen.x = 0 + (300*r2) + (dungYen.width*r2);
+dungYen.y = 0 + 100*t  +   (dungYen.height*t);
+
+r2++;
+
+}
+r++;
+
+
+if(e == "flymove") 
+{
+    dungYen.x = 200;
+dungYen.y = 150;
+r--;
+}
+
+
+
+
+
+dungYen.name = e;
+
+
+dungYen.scale.x *=2.0;
+dungYen.scale.y *=2.0;
+
+
+Allsprite.addChild(dungYen);
+        });
+
+        Allsprite.x = -100;
+        let attackTimeout;
+
+        function update_attack() {
+        clearTimeout(attackTimeout);
+            
+        array.forEach(element => {
+            let PlayerAo; 
+            let PlayerQuan;
+            let PlayerDau;
+
+            let head;
+            let foot;
+            let body;
+            
+            // đầu buồi ấy
+            let phantu_playerDau;
+            let name_move_playerDau;
+            let data_load_playerDau;
+            let load_item_farm_playerDau;
+            let count_farm_playerDau;
+
+            // áo 
+            let phantu;
+            let name_move;
+            let data_load;
+            let load_item_farm;
+            let count_farm;
+
+            // quần
+            let phantu_playerQuan;
+            let name_move_playerQuan;
+            let data_load_playerQuan;
+            let load_item_farm_playerQuan;
+            let count_farm_playerQuan;
+
+            load_playerQuan = getImg(myPlayer.skin.quan);
+            load_playerAo = getImg(myPlayer.skin.ao);
+            load_playerDau = getImg(myPlayer.skin.dau);
+
+            let Player = null;
+
+            Player = Allsprite.getChildByName(element)
+            if(Player) 
+            {
+                playerAo = Player.getChildByName('playerAo');
+                        playerQuan = Player.getChildByName('playerQuan');
+                        playerDau = Player.getChildByName('playerDau');
+
+                        head = Player.getChildByName('head');
+                        foot = Player.getChildByName('foot');
+                        body = Player.getChildByName('body');
+                        phantu_playerDau = myPlayer.skin.dau;
+                phantu = myPlayer.skin.ao;
+                phantu_playerQuan = myPlayer.skin.quan;
+
+                playerAo.visible = setting_edit.ao ? true : false;
+                playerQuan.visible = setting_edit.quan ? true : false;
+                playerDau.visible = setting_edit.dau ? true : false;
+
+                head.visible = setting_edit.dau_mau ? true : false;
+                foot.visible = setting_edit.quan_mau ? true : false;
+                body.visible = setting_edit.ao_mau ? true : false;
+
+                
+
+
+            }
+
+            if(Player) 
+            {
+
+
+                if(1+1 == 2) 
+                {
+                    let nameSprite = element;
+                    if(element != 'flymove') 
+                    {
+                        let sprites = [playerAo, playerQuan, playerDau];
+                        sprites.forEach((sprite) => { 
+
+                            if (sprite === playerQuan) 
+                            {
+
+                                phantu = myPlayer.skin.quan;
+                                name_move = playerQuan.sprite;
+                                data_load = getImg(phantu).farm[0][nameSprite];
+                                if(data_load)
+                                {
+                                    load_item_farm = data_load.farme;
+                                    count_farm = load_item_farm.length;
+                                    playerQuan.x = data_load.x   + ( ( data_load.xx < 0 ||  data_load.xx > 0) ? data_load.xx : 0  ) ; 
+                                    playerQuan.y = data_load.y +   ( ( data_load.yy < 0 ||  data_load.yy > 0) ? data_load.yy : 0  );
+
+
+                                    if (data_load.width < 10 && data_load.height < 10) {
+                                        playerQuan.scale.set(data_load.width, data_load.height);
+                                    }
+                                    else 
+                                    {
+                                        playerQuan.width = data_load.width;
+                                        playerQuan.height = data_load.height;
+                                    }
+                            
+                                    playerQuan.texture =PIXI.utils.TextureCache[getFarm(phantu, load_item_farm[name_move])];
+                                    if (playerQuan.sprite + 1 > count_farm) {
+                                        playerQuan.sprite = 0;
+                                    }
+
+                                    if(count_farm >1) 
+                                    {
+                                        playerQuan.sprite++;
+                                    }
+
+                                }
+                            }
+
+                            if (sprite === playerAo) 
+                            {
+                                
+                                phantu = myPlayer.skin.ao;
+                                name_move = playerAo.sprite;
+                                data_load = getImg(phantu).farm[0][nameSprite];
+                                if(data_load)
+                                {
+                                    load_item_farm = data_load.farme;
+                                    count_farm = load_item_farm.length;
+                                    playerAo.x =data_load.x   + ( ( data_load.xx < 0 ||  data_load.xx > 0) ? data_load.xx : 0  ) ; 
+                                    playerAo.y = data_load.y +   ( ( data_load.yy < 0 ||  data_load.yy > 0) ? data_load.yy : 0  );
+
+
+                                    if (data_load.width < 10 && data_load.height < 10) {
+                                        playerAo.scale.set(data_load.width, data_load.height);
+                                    }
+                                    else 
+                                    {
+                                        playerAo.width = data_load.width;
+                                        playerAo.height = data_load.height;
+                                    }
+                            
+                                    playerAo.texture =PIXI.utils.TextureCache[getFarm(phantu, load_item_farm[name_move])];
+                                    if (playerAo.sprite + 1 > count_farm) {
+                                        playerAo.sprite = 0;
+                                    }
+
+                                    if(count_farm >1) 
+                                    {
+                                        playerAo.sprite++;
+                                    }
+
+                                }
+                            }
+
+                            if (sprite === playerDau) 
+                            {
+                                
+                                phantu = myPlayer.skin.dau;
+                                name_move = playerDau.sprite;
+                                data_load = getImg(phantu).farm[0][nameSprite];
+                                if(data_load)
+                                {
+                                    load_item_farm = data_load.farme;
+                                    count_farm = load_item_farm.length;
+                                    playerDau.x = data_load.x   + ( ( data_load.xx < 0 ||  data_load.xx > 0) ? data_load.xx : 0  ) ; 
+                                    playerDau.y = data_load.y +   ( ( data_load.yy < 0 ||  data_load.yy > 0) ? data_load.yy : 0  );
+
+
+                                    if (data_load.width < 10 && data_load.height < 10) {
+                                        playerDau.scale.set(data_load.width, data_load.height);
+                                    }
+                                    else 
+                                    {
+                                        playerDau.width = data_load.width;
+                                        playerDau.height = data_load.height;
+                                    }
+                            
+                                    playerDau.texture =PIXI.utils.TextureCache[getFarm(phantu, load_item_farm[name_move])];
+                                    if (playerDau.sprite + 1 > count_farm) {
+                                        playerDau.sprite = 0;
+                                    }
+
+                                    if(count_farm >1) 
+                                    {
+                                        playerDau.sprite++;
+                                    }
+
+                                }
+                            }
+
+
+                        });
+                    }
+                    
+                       
+                    return;
+                }
+
+               
+               }
+
+          
+           
+
+         
+                /// update new
+
+              
+             
+                
+            // update nhớ set all sprite = 0;
+        });
+
+        attackTimeout = setTimeout(() => {
+            requestAnimationFrame(update_attack, 33.33);
+        }, 55);
+        }
+
+
+
+        requestAnimationFrame(update_attack);
+
+
+        app.stage.addChild(Allsprite);
+
+
+        
+        app.view.addEventListener('wheel', (event) => {
+  // Lấy tọa độ chuột
+  /*
+  const mouseX = event.clientX - app.view.offsetLeft;
+  const mouseY = event.clientY - app.view.offsetTop;
+
+  // Lấy giá trị delta của sự kiện
+  const delta = event.deltaY;
+
+  // Tính toán tỉ lệ phóng to/t thu nhỏ
+  const scale = delta > 0 ? 1.1 : 0.9;
+
+  // Thay đổi tỉ lệ của sprite
+  Allsprite.scale.x *= scale;
+  Allsprite.scale.y *= scale;
+
+  // Tính toán vị trí của sprite để giữ nguyên tọa độ con trỏ chuột
+  const dx = mouseX - Allsprite.x;
+  const dy = mouseY - Allsprite.y;
+  Allsprite.x -= dx * (scale - 1);
+  Allsprite.y -= dy * (scale - 1);
+*/
+
+Allsprite.y += event.deltaY > 0 ? 20 : -20;
+
+  event.preventDefault();
+});
+
+
+
+     
+addEventListener('keydown', (event) => {
+    if(event.keyCode == 39 || event.keyCode == 37 ) 
+    {
+        // block default
+        event.preventDefault();
+    }
+    if(event.keyCode == 39) 
+    {
+        Allsprite.x-=20;
+    }
+    if(event.keyCode == 37) 
+    {
+        Allsprite.x+=20;
+    }
+
+   
+});
+
+      }
+
+       
+</script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+</html>

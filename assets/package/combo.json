@@ -1,0 +1,146 @@
+[
+  {
+    "desc": "Cào2",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a28", "a9"],
+        "delay": 30
+      },
+      {
+        "group": ["a26", "a27"],
+        "delay": 30
+      },
+      {
+        "group": ["a3", "a9"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "Cào",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a34", "a9"],
+        "delay": 30
+      },
+      {
+        "group": ["a34", "a9"],
+        "delay": 30
+      },
+      {
+        "group": ["a34", "a9"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "Đấm xuống",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a23", "a1"],
+        "delay": 30
+      },
+      {
+        "group": ["a23", "a1"],
+        "delay": 30
+      },
+      {
+        "group": ["a23", "a1"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "Đấm lên",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a17", "a2"],
+        "delay": 30
+      },
+      {
+        "group": ["a17", "a2"],
+        "delay": 30
+      },
+      {
+        "group": ["a17", "a2"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "lướt",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a19", "a18"],
+        "delay": 30
+      },
+      {
+        "group": ["a22", "a33"],
+        "delay": 30
+      },
+      {
+        "group": ["a19", "a18"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "chéo tay",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a24", "a21"],
+        "delay": 30
+      },
+      {
+        "group": ["a32", "a25"],
+        "delay": 30
+      },
+      {
+        "group": ["a4", "a1"],
+        "delay": 30
+      }
+    ]
+  },
+  {
+    "desc": "Đấm",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a36", "a39"],
+        "delay": 25
+      },
+      {
+        "group": ["a35", "a15"],
+        "delay": 25
+      },
+      {
+        "group": ["a14", "a14"],
+        "delay": 25
+      }
+    ]
+  },
+  {
+    "desc": "cào",
+    "type": "traidat",
+    "data": [
+      {
+        "group": ["a38", "a8"],
+        "delay": 25
+      },
+      {
+        "group": ["a37", "a7"],
+        "delay": 25
+      },
+      {
+        "group": ["a6", "a6"],
+        "delay": 25
+      }
+    ]
+  }
+]

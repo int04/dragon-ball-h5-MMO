@@ -1,0 +1,376 @@
+
+<html lang="vi">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="theme-color" content="#F2462E">
+<meta name="viewport"
+content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="full-screen" content="yes">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
+<meta name="keywords" content="Pokemon X,Pokemon Y,Pokemon Black, Pokemon White,Pokemon RPG,MMORPG, Pokemon MMORPG, Pokemon Online, Pokemon MMO, Pokemon Game, Online Pokemon Game, Pokemon, RPG , pokemon h5">
+<meta name="description" content="Web Game PokeMon MMO Play NOW.">
+<meta property="og:title" content="PokeMon Web Game">
+<meta property="og:description" content="PokeMon Burn - Trò chơi di chuyển tự do phưu lưu cùng bạn bè tổ đội v.v">
+<html itemscope itemtype="http://schema.org/Product">
+<meta itemprop="name" content="PokeMon H5 Online">
+<meta itemprop="description" content="PokeMOn H5- Trò chơi khám phá di chuyển phưu lưu cùng bạn bè online v.v">
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+ 
+
+<style>
+  
+</style>
+</head>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12" id="header">
+            <div id="game"></div>
+
+            </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-8" id="">
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr id="filer">
+                        
+                    </tr>
+                </thead>
+                <tbody id="data">
+                    
+                </tbody>
+            </table>
+            
+        </div>
+     
+        
+      </div>
+
+
+      <script>
+      let cache = []; 
+      function xoa() {
+        let id = $("#id").val();
+        let index = cache.findIndex(x => x.id == id);
+        if(index != -1){
+            cache.splice(index,1);
+            capnhatbang();
+        }
+      }
+      function coppy(id) 
+      {
+        let item = cache.find(x => x.id == id);
+        if(item) 
+        {
+            $("#id").val(item.id);
+            $("#avatar").val(item.avatar);
+            $("#name").val(item.name);
+            $("#sucmanh").val(item.sucmanh);
+            $("#type").val(item.type);
+            $("#type2").val(item.type2);
+            $("#class").val(item.class);
+            $("#mota").val(item.mota);
+            $("#motadai").val(item.motadai);
+            $("#khoa").val(item.khoa);
+            for(let bien in item.info){
+                $("#info_"+bien).val(item.info[bien]);
+            }
+            for(let bien in item.script){
+                $("#script_"+bien).val(item.script[bien]);
+            }
+        }
+      }
+
+      function clone() 
+      {
+        let id = $("#id").val();
+        let item = cache.find(x => x.id == id);
+        if(item) 
+        {
+            let id2 = prompt('Nhập ID mới');
+            if(id2){
+                let item2 = JSON.parse(JSON.stringify(item));
+                item2.id = id2;
+                cache.push(item2);
+                coppy(id2);
+                capnhatbang();
+            }
+        }
+      }
+
+      function update(submit = false) {
+        let id = $("#id").val();
+        let avatar = $("#avatar").val();
+        let sucmanh = $("#sucmanh").val();
+        let name = $("#name").val();
+        let type = $("#type").val();
+        let type2 = $("#type2").val();
+        let classs = $("#class").val();
+        let mota = $("#mota").val();
+        let motadai = $("#motadai").val();
+        let khoa = $("#khoa").val();
+        let info = {
+            hp : $("#info_hp").val() >> 0, // tăng hp: vd 50
+            giap : $("#info_giap").val() >> 0, // tăng giáp: vd 50 giáp
+            chimang : $("#info_chimang").val() >> 0, // tăng chí mạng: vd: 10
+            sucdanh : $("#info_sucdanh").val() >> 0, // tăng sức đánh
+            ki : $("#info_ki").val() >> 0, // tăng ki
+            hutmau : $("#info_hutmau").val() >> 0, // tăng % hút máu
+            hoimau : $("#info_hoimau").val() >> 0, // tăng % hồi máu sau 30s
+            hoiki30s : $("#info_hoiki30s").val() >> 0, // hổi ki sau 30s
+            hoihp30s : $("#info_hoihp30s").val() >> 0, // hồi hp sau 30s,
+            hoiki : $("#info_hoiki").val() >> 0, // tăng % hồi ki sau 30s
+            hutki : $("#info_hutki").val() >> 0, // tăng % hút ki khi đánh
+            phandon : $("#info_phandon").val()>> 0, // tắng % phản lại đòn đánh
+            hoichieu : $("#info_hoichieu").val()>> 0, // giảm % thời gian hồi chiêu,
+            gocgiap : $("#info_gocgiap").val()>> 0, // tăng % giáp lấy từ gốc
+            gochp : $("#info_gochp").val()>> 0, // tăng % lượng hp gốc
+            gocki : $("#info_gocki").val()>> 0, // tăng % lượng ki gốc
+            gocsucdanh : $("#info_gocsucdanh").val()>> 0, // tăng % lượng sức đánh gốc
+        }
+        let script = {
+            ao : $("#script_ao").val(),
+            quan : $("#script_quan").val(),
+            dau : $("#script_dau").val(),
+            avatar : $("#script_avatar").val(),
+        }
+
+        let item = cache.find(x => x.id == id);
+        if(item){
+            item.avatar = avatar;
+            item.name = name;
+            item.type = type;
+            item.sucmanh = sucmanh;
+            item.type2 = type2;
+            item.class = classs;
+            item.mota = mota;
+            item.motadai = motadai;
+            item.khoa = khoa;
+            item.info = info;
+            item.script = script;
+        }else
+        if(submit){
+            cache.push({
+                id : id,
+                avatar : avatar,
+                name : name,
+                type : type,
+                sucmanh : sucmanh,
+                type2 : type2,
+                class : classs,
+                mota : mota,
+                motadai : motadai,
+                khoa : khoa,
+                info : info,
+                script : script,
+            })
+        }
+        $("#out").val(JSON.stringify(cache),null,2);
+        capnhatbang();
+      }
+
+      function capnhatbang() {
+            $("#data").html('');
+            // sort cache ID DESC
+            cache.sort(function(a, b){return b.id - a.id});
+            for(let i = 0; i < cache.length; i++){
+                let item = cache[i];
+                let info = '';
+                for(let bien in item.info){
+                    if( item.info[bien] != 0)
+                    info += bien + ' : ' + item.info[bien] + '<br>';
+                }
+                let script = '';
+                for(let bien in item.script){
+                    if( item.script[bien] != '')
+                    script += bien + ' : ' + item.script[bien] + '<br>';
+                }
+                $("#data").append(`
+                <tr>
+                    <td onclick="coppy(${item.id})">${item.id}</td>
+                    <td>${item.avatar}</td>
+                    <td>${item.name}</td>
+                    <td>${item.sucmanh}</td>
+                    <td>${item.type}</td>
+                    <td>${item.type2}</td>
+                    <td>${item.class}</td>
+                    <td>${item.mota}</td>
+                    <td>${item.motadai}</td>
+                    <td>${item.khoa}</td>
+                    <td>${info}</td>
+                    <td>${script}</td>
+                `)
+            }
+            $("#out").val(JSON.stringify(cache),null,2);
+      }
+
+        $(document).ready(function(){
+            let data_demo =  {id : 24,
+        avatar : "1694",
+        name : 'Quần Jean calic',
+        sucmanh : 49000000,
+        type : 'trangbi',
+        type2 : 'quan',
+        class : 'traidat',
+        mota : 'Trang bị giúp máu.',
+        motadai : 'Tăng thêm lượng máu cho bản thân.',
+        khoa : 0,
+        info : {
+            hp : 52000, // tăng hp: vd 50
+            giap : 0, // tăng giáp: vd 50 giáp
+            chimang : 0, // tăng chí mạng: vd: 10
+            sucdanh : 0, // tăng sức đánh
+            ki : 0, // tăng ki
+
+            hutmau : 0, // tăng % hút máu
+            hoimau : 0, // tăng % hồi máu sau 30s
+            hoiki30s : 0, // hổi ki sau 30s 
+            hoihp30s : 0, // hồi hp sau 30s,
+            hoiki : 0, // tăng % hồi ki sau 30s
+            hutki : 0, // tăng % hút ki khi đánh
+            phandon : 0, // tắng % phản lại đòn đánh
+            hoichieu : 0, // giảm % thời gian hồi chiêu,
+
+            gocgiap : 0, // tăng % giáp lấy từ gốc
+            gochp : 0, // tăng % lượng hp gốc
+            gocki : 0, // tăng % lượng ki gốc
+            gocsucdanh : 0, // tăng % lượng sức đánh gốc
+        }, 
+        script : { // nếu là trangbi thì liên kết với script để thay ảnh nhân vật
+            ao : "",
+            quan : "",
+            dau : "",  
+            avatar : "",
+        }
+    }
+
+    for(let bien in data_demo){
+        if(bien == 'script'){
+            $('#filer').append('<th>'+bien+'</th>')
+            for(let bien2 in data_demo[bien]){
+                let txt= '';
+            txt += `<div class="form-group">
+    <label for="exampleInputEmail1">${bien2}</label>`; 
+    txt += `<input type="text" value="" id="script_${bien2}" class="form-control" placeholder="${bien2}">`;
+    txt += `</div>`;
+
+            $("#input3").append(txt);
+                $("#script_"+bien2).on('input',function(){
+                update();
+            });
+            }
+        }
+            else
+        if(bien == 'info'){
+            $('#filer').append('<th>'+bien+'</th>')
+            for(let bien2 in data_demo[bien]){
+                
+                let txt= '';
+            txt += `<div class="form-group">
+    <label for="exampleInputEmail1">${bien2}</label>`; 
+    txt += `<input type="text" value="" id="info_${bien2}" class="form-control" placeholder="${bien2}">`;
+    txt += `</div>`;
+
+            $("#input2").append(txt);
+                $("#info_"+bien2).on('input',function(){
+                update();
+            });
+            }
+
+           
+        }else{
+            $('#filer').append('<th>'+bien+'</th>')
+            let txt= '';
+            txt += `<div class="form-group">
+    <label for="exampleInputEmail1">${bien}</label>`; 
+    txt += `<input type="text" value="" id="${bien}" class="form-control" placeholder="${bien}">`;
+    txt += `</div>`;
+
+            $("#input").append(txt);
+            $("#"+bien).on('input',function(){
+                update();
+            });
+    }
+         
+}
+        })
+
+
+        </script>
+      <div class="col-lg-4" id="sidebar">
+      
+   
+   
+    
+
+     <div class="container">
+       
+        <button class="btn btn-success" onclick="update(true)">Nhập</button>
+        <button class="btn btn-danger" onclick="xoa()">xóa</button>
+        <button class="btn btn-danger" onclick="clone()">Nhân bản</button>
+        
+        <div class="row">
+            <div class="col-lg-6" id="input"></div>
+            <div class="col-lg-3" id="input2"></div>
+            <div class="col-lg-3" id="input3"></div>
+        </div>
+      
+      
+
+        <hr> 
+
+        <textarea id="out" rows="3" class="form-control"></textarea>
+
+    </div>
+
+    <hr>
+        
+      </div>
+    </div>
+  </div>
+
+  <style>
+     #game-container {
+height: 100vh; /* Chiáº¿m 70% chiá»u cao cá»§a mĂ n hĂ¬nh */
+background-color: #f8f9fa; /* MĂ u ná»n cá»§a khung game */
+}
+
+#sidebar {
+height: 100vh; /* Chiáº¿m 30% chiá»u cao cá»§a mĂ n hĂ¬nh */
+background-color: #e9ecef; /* MĂ u ná»n cá»§a khung tĂ¹y chá»n */
+}
+
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+  </style>
+</body>
+
+
+</html>

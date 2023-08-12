@@ -1,0 +1,20 @@
+{
+    "name" : "Dragon Ball H5",
+    "version" : "0.0.1",
+    "server" : "127.0.0.1:2004",
+    "srcSheet" : ["dam"],
+    "font" : {
+    "PatrickHandSCRegular" : "PatrickHandSC-Regular", 
+    "PottaOne-Regular" : "", 
+    "fontchinh" : "Coiny-Regular", 
+    "chelthm" : "unicode.chelthm", 
+    "staccato" : "",
+    "Itim-Regular" : "",
+    "Calistoga" : ""
+},
+    "time" : 200,
+    "debug" : false,
+    "login" : false,
+    "nameDEV" : "int04"
+}
+

@@ -1,0 +1,475 @@
+<!-------html------->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>My First Web Page</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.12/pixi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@pixi/tilemap@latest/dist/pixi-tilemap.umd.js"></script>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@pixi/filter-kawase-blur@3.1.1/dist/filter-kawase-blur.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@pixi/filter-drop-shadow@3.1.1/dist/filter-drop-shadow.min.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+<style>
+ 
+</style>
+</head>
+<body>
+
+  
+    <div class="container-fluid">
+        <div class="row">
+          
+          <div class="col-lg-8" id="">
+               <div id="game" style=" height: 800px;"> </div>
+
+               <div id="game2" style=" ">
+              
+                <hr>Cài đặt  <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="datCheckbox" onclick="KeoCanVas()" checked>
+                  <label class="form-check-label" for="datCheckbox">Tự kéo</label>
+                </div> 
+                <div class="form-check form-check-inline"> Tốc độ:
+                <input type="text" class="form-check-input" id="speed" value="48">
+                </div>
+  
+                <div class="form-check form-check-inline">                <input type="checkbox" class="form-check-input" id="zxczxczxc" onclick="setingBuoc()" >
+                  <label class="form-check-label" for="zxczxczxc">Từng bước</label>
+  
+                  <input type="checkbox" class="form-check-input" id="zczxczxczaaa" onclick="settingXoa()" >
+                  <label class="form-check-label" for="zczxczxczaaa">Chạm xóa</label>
+  
+                  </div>
+                <hr> 
+
+                <div class="container mt-4">
+                  <div class="form-group">
+                      Cảnh:
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="datCheckbox" onclick="updateSetting('dat')" checked>
+                      <label class="form-check-label" for="datCheckbox">Đất</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="hoaCheckbox" onclick="updateSetting('hoa')" checked>
+                      <label class="form-check-label" for="hoaCheckbox">Hoa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="cayCheckbox" onclick="updateSetting('cay')" checked>
+                      <label class="form-check-label" for="cayCheckbox">Cây cối</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="nuidaCheckbox" onclick="updateSetting('nuida')" checked>
+                      <label class="form-check-label" for="nuidaCheckbox">Núi đá</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="nuixaCheckbox" onclick="updateSetting('nuixa')" checked>
+                      <label class="form-check-label" for="nuixaCheckbox">Núi xa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="nuixaCheckbox" onclick="updateSetting('nuixanua')" checked>
+                      <label class="form-check-label" for="nuixaCheckbox">Núi xa nữa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="bautroiCheckbox" onclick="updateSetting('bautroi')" checked>
+                      <label class="form-check-label" for="bautroiCheckbox">Bầu trời</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="longdatCheckbox" onclick="updateSetting('longdat')" checked>
+                      <label class="form-check-label" for="longdatCheckbox">Lòng đất</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="chezxczxc" onclick="updateSetting('che')" checked>
+                      <label class="form-check-label" for="chezxczxc">Che</label>
+                    </div>
+  
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" class="form-check-input" id="chezxczxc" onclick="updateSetting('hienall')" checked>
+                      <label class="form-check-label" for="chezxczxc">Hiện ALL</label>
+                    </div>
+                   
+                  </div>
+                 
+              </div>
+
+
+              <div class="container mt-4">
+                <div class="form-group">
+                    Lưới:
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="datCheckbox" onclick="updateSetting2('dat')" checked>
+                    <label class="form-check-label" for="datCheckbox">Đất</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="hoaCheckbox" onclick="updateSetting2('hoa')" checked>
+                    <label class="form-check-label" for="hoaCheckbox">Hoa</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="cayCheckbox" onclick="updateSetting2('cay')" checked>
+                    <label class="form-check-label" for="cayCheckbox">Cây cối</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="nuidaCheckbox" onclick="updateSetting2('nuida')" checked>
+                    <label class="form-check-label" for="nuidaCheckbox">Núi đá</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="nuixaCheckbox" onclick="updateSetting2('nuixa')" checked>
+                    <label class="form-check-label" for="nuixaCheckbox">Núi xa</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="nuixaCheckbox" onclick="updateSetting2('nuixanua')" checked>
+                    <label class="form-check-label" for="nuixaCheckbox">Núi xa nữa</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="bautroiCheckbox" onclick="updateSetting2('bautroi')" checked>
+                    <label class="form-check-label" for="bautroiCheckbox">Bầu trời</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="longdatCheckbox" onclick="updateSetting2('longdat')" checked>
+                    <label class="form-check-label" for="longdatCheckbox">Lòng đất</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="zvzxczxc" onclick="updateSetting2('che')" checked>
+                    <label class="form-check-label" for="zvzxczxc">Che</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="zvzxczxc" onclick="updateSetting2('hienALl')" checked>
+                    <label class="form-check-label" for="zvzxczxc">Hiện all</label>
+                  </div>
+                 
+                 
+                </div>
+               
+               <center>
+                <div class="form-group">
+                  Xóa di chuột:
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="datCheckboxxx" onclick="updateSetting4('dat')" >
+                  <label class="form-check-label" for="datCheckboxxx">Đất</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="zxcvzxcv" onclick="updateSetting4('hoa')" >
+                  <label class="form-check-label" for="zxcvzxcv">Hoa</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="gsdfgsdfgsdfg" onclick="updateSetting4('cay')" >
+                  <label class="form-check-label" for="gsdfgsdfgsdfg">Cây cối</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="ghfgdhdfgh" onclick="updateSetting4('nuida')" >
+                  <label class="form-check-label" for="ghfgdhdfgh">Núi đá</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="fghjfghjfghj" onclick="updateSetting4('nuixa')" >
+                  <label class="form-check-label" for="fghjfghjfghj">Núi xa</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="jfghjfghjfgjh" onclick="updateSetting4('nuixanua')" >
+                  <label class="form-check-label" for="jfghjfghjfgjh">Núi xa nữa</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="tuyityuityui" onclick="updateSetting4('bautroi')" >
+                  <label class="form-check-label" for="tuyityuityui">Bầu trời</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="vcbncvbncvbncvbn" onclick="updateSetting4('longdat')" >
+                  <label class="form-check-label" for="vcbncvbncvbncvbn">Lòng đất</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="xcvbxcvbxcvbcxvb" onclick="updateSetting4('che')" >
+                  <label class="form-check-label" for="xcvbxcvbxcvbcxvb">Che</label>
+                </div>
+
+              
+              </div>
+               </center>
+
+               <hr>
+
+               <hr>
+               <center>
+                <button class="btn-danger" onclick="xoaall('dat')">Xóa dat </button>
+                <button class="btn-danger" onclick="xoaall('hoa')">Xóa hoa</button>
+
+                <button class="btn-danger" onclick="xoaall('cay')">Xóa cay</button>
+                <button class="btn-danger" onclick="xoaall('longdat')">Xóa longdat</button>
+                <button class="btn-danger" onclick="xoaall('nuida')">Xóa nuida</button>
+                <button class="btn-danger" onclick="xoaall('nuixa')">Xóa  nuixa</button>
+                <button class="btn-danger" onclick="xoaall('nuixanua')">Xóa nuixanua </button>
+                <button class="btn-danger" onclick="xoaall('bautroi')">Xóa bautroi </button>
+                <button class="btn-danger" onclick="xoaall('che')">Xóa che </button>
+
+               </center>
+               <hr>
+
+            </div>
+
+
+              </div>
+          </div>
+          <div class="col-lg-4" id="sidebar">
+         
+            
+
+            
+            <hr>
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab1">Đất</a></li>
+                    <li><a data-toggle="tab" href="#tab2">Cây cối</a></li>
+                    <li><a data-toggle="tab" href="#tab3">Nhà cửa</a></li>
+                    <li><a data-toggle="tab" href="#tab4">Khác</a></li>
+                    <li><a data-toggle="tab" href="#tab5">Trang trí</a></li>
+                    <li><a data-toggle="tab" href="#tab6">Hiệu ứng</a></li>
+                    <li><a data-toggle="tab" href="#tab7">Kết cấu</a></li>
+                    <li><a data-toggle="tab" href="#tab8">Kết cấu 2</a></li>
+
+
+                </ul>
+        
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane  in active  gallery">
+                       
+                    </div>
+                    <div id="tab2" class="tab-pane  gallery">
+                      
+                    </div>
+                    <div id="tab3" class="tab-pane gallery ">
+                        
+                    </div>
+                    <div id="tab4" class="tab-pane gallery ">
+                        
+                    </div>
+                    <div id="tab5" class="tab-pane gallery ">
+                        
+                    </div>
+                    <div id="tab6" class="tab-pane gallery ">
+                        
+                    </div>
+
+                    <div id="tab7" class="tab-pane gallery ">
+                        
+                    </div>
+
+                    <div id="tab8" class="tab-pane gallery ">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .gallery {
+                    max-height: 400px; /* Độ cao tối đa của thẻ div chứa danh sách ảnh */
+                    resize: both;
+                    overflow: auto;
+                    padding: 6px;
+                }
+                .gallery img {
+  transition: box-shadow 0.3s ease-in-out; /* Thêm hiệu ứng transition cho box-shadow */
+}
+
+.gallery img:hover {
+    box-shadow: 0 0 0 2px #000, 0 0 0 2px #000 inset, 0 0 0 2px #000, 0 0 0 2px #000 inset; /* Hiển thị cả 4 đường viền đen 2px bao quanh ảnh */
+}
+            </style>
+            <hr>
+
+
+            <div id="add"> 
+                <hr><b><font color="red">Thêm map:</font></b></hr>
+
+              
+
+                <div class="form-group">
+                    <label for="usr">Vị trí muốn thêm (-1 nếu muốn mới nhất):</label>
+                    <input type="text" class="form-control" id="add_i" value="-1">
+                  </div>
+
+                <div class="form-group">
+                    <label for="usr">Src ảnh:</label>
+                    <input type="text" class="form-control" id="add_name">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Thuộc tính:</label>
+                    <select id="add_type" class="form-control">
+                        <option value="dat">Đất</option>
+                        <option value="hoa">Hoa</option>
+                        <option value="cay">Cây cối</option>
+                        <option value="longdat">Lòng đất</option>
+                        <option value="nuida">Núi đá</option>
+                        <option value="nuixa">Núi xa</option>
+                        <option value="nuixanua">Núi xa nữa</option>
+                        <option value="bautroi">Bầu trời</option>
+                        <option value="che">Che</option>
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">x:</label>
+                    <input type="number" class="form-control" id="add_x">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">y:</label>
+                    <input type="number" class="form-control" id="add_y">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Rộng:</label>
+                    <input type="number" class="form-control" id="add_width" value="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Dài:</label>
+                    <input type="number" class="form-control" id="add_height" value="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Số ô X:</label>
+                    <input type="number" class="form-control" id="add_oX" value="1">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Số ô Y:</label>
+                    <input type="number" class="form-control" id="add_oY" value="1">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pwd">Scale X:</label>
+                    <input type="number" class="form-control" id="add_scale" value="1">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pwd">Ngẫu nhiên hoa (nhớ chọn thuộc tính hoa trước):</label>
+                    <input type="text" class="form-control" id="add_random" >
+                  </div>
+                  <button class="btn btn-success" onclick="button_add()">Thêm vào</button>
+            </div>
+
+
+            <div id="edit"> 
+                <hr><b><font color="red">SỬA:</font></b></hr>
+
+                <div class="form-group" style="display: block;">
+                    <label for="usr">I ban đầu:</label>
+                    <input type="text" class="form-control" id="edit_ii">
+                  </div>
+
+                <div class="form-group">
+                    <label for="usr">Vị trí:</label>
+                    <input type="text" class="form-control" id="edit_i">
+                  </div>
+
+                <div class="form-group">
+                    <label for="usr">Src ảnh:</label>
+                    <input type="text" class="form-control" id="edit_name">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Thuộc tính:</label>
+                    <input type="text" class="form-control" id="edit_type">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">x:</label>
+                    <input type="number" class="form-control" id="edit_x">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">y:</label>
+                    <input type="number" class="form-control" id="edit_y">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Rộng:</label>
+                    <input type="number" class="form-control" id="edit_width">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Dài:</label>
+                    <input type="number" class="form-control" id="edit_height">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pwd">scale X:</label>
+                    <input type="number" class="form-control" id="edit_scale">
+                  </div>
+
+                 
+                  <button class="btn btn-success" onclick="button_save()">Lưu</button>
+            </div>
+            
+
+
+            <hr>Lưu Map <hr> 
+            <textarea id="map" class="form-control" rows="3"></textarea>
+            <button type="button" class="btn btn-primary mt-2" onclick="saveMap()">Lấy data</button>
+            <button type="button" class="btn btn-primary mt-2" onclick="loadDataMap()">Loading map</button>
+
+
+            
+          </div>
+        </div>
+      </div>
+    
+      <style>
+         #game-container {
+  height: 100vh; /* Chiếm 70% chiều cao của màn hình */
+  background-color: #f8f9fa; /* Màu nền của khung game */
+}
+
+#sidebar {
+  height: 100vh; /* Chiếm 30% chiều cao của màn hình */
+  background-color: #e9ecef; /* Màu nền của khung tùy chọn */
+}
+      </style>
+    </body>
+ 
+    <script>
+        let cache = []
+        </script>
+
+    <script defer  src="./source/base/img.js"></script>
+<script defer  src="./source/base/caitrang.js"></script>
+<script defer  src="./source/base/ao.js"></script>
+<script defer  src="./source/base/quan.js"></script>
+<script defer  src="./source/base/dau.js"></script>
+<script defer  src="./source/base/spQuai.js"></script>
+<script defer  src="./source/base/co.js"></script>
+<script defer  src="./source/base/item.js"></script>
+<script defer  src="./source/base/kinang.js"></script>
+<script defer  src="./source/base/skill.js"></script>
+
+
+<script defer  src="./source/base/assets.js?truec"></script>
+
+
+<script defer  src="base3.js?done"></script>
+<script defer  src="editmap.js"></script>
+
+
+
+
+<script defer  src="tool.js"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+   function congthem(type,y) 
+{
+    let data = bando.children.filter(e => e.type == type);
+    for(let i = 0; i < data.length; i++)
+    {
+        let e = data[i];
+        e.y+= y;
+    }
+}
+</script>
+</html>

@@ -1,0 +1,88 @@
+{"frames": {
+
+"-1.png":
+{
+	"frame": {"x":2044,"y":1023,"w":3,"h":3},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":3},
+	"sourceSize": {"w":80,"h":80}
+},
+"1px.png":
+{
+	"frame": {"x":2044,"y":1023,"w":3,"h":3},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":3},
+	"sourceSize": {"w":1,"h":1}
+},
+"big0.png":
+{
+	"frame": {"x":1,"y":1,"w":1020,"h":1020},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1020,"h":1020},
+	"sourceSize": {"w":1020,"h":1020}
+},
+"big1.png":
+{
+	"frame": {"x":1,"y":1023,"w":1020,"h":1020},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1020,"h":1020},
+	"sourceSize": {"w":1020,"h":1020}
+},
+"big2.png":
+{
+	"frame": {"x":1023,"y":1,"w":1020,"h":1020},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1020,"h":1020},
+	"sourceSize": {"w":1020,"h":1020}
+},
+"big4.png":
+{
+	"frame": {"x":1023,"y":1023,"w":1019,"h":1020},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1019,"h":1020},
+	"sourceSize": {"w":1020,"h":1020}
+},
+"none.png":
+{
+	"frame": {"x":2044,"y":1023,"w":3,"h":3},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":3},
+	"sourceSize": {"w":68,"h":48}
+},
+"undefined.png":
+{
+	"frame": {"x":2044,"y":1023,"w":3,"h":3},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":3},
+	"sourceSize": {"w":68,"h":48}
+},
+"zero.png":
+{
+	"frame": {"x":2044,"y":1023,"w":3,"h":3},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":3},
+	"sourceSize": {"w":68,"h":48}
+}},
+"animations": {
+	"big": ["big0.png","big1.png","big2.png","big4.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "demo-0.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2044},
+	"scale": "1",
+	"related_multi_packs": [ "demo-1.json", "demo-2.json", "demo-3.json", "demo-4.json", "demo-5.json" ],
+	"smartupdate": "$TexturePacker:SmartUpdate:a990806b12c6ff2cb7f5ea063fb550d1:b8a4c19dcfb1ac30a7feb6e5ba40c52e:950b6df6ddb57c53453b691344f3c3ea$"
+}
+}
